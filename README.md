@@ -1,41 +1,61 @@
 # Build makemore: MLP
 
-A small character-level language model built in PyTorch. This project follows the MLP portion of Andrej Karpathy's **makemore** series: it learns patterns in a names dataset and uses them to generate new, name-like strings.
+A character-level language model built with PyTorch. This educational project follows the MLP portion of Andrej Karpathy's [makemore series](https://github.com/karpathy/makemore): it learns patterns from a names dataset and samples new, name-like strings.
 
-## What's inside
+> **Project status:** Learning project / notebook implementation. It is not packaged as a production-ready library or command-line application.
 
-The project is currently a Jupyter notebook: [`build_makemore_mlp.ipynb`](build_makemore_mlp.ipynb). It walks through:
+## What you'll learn
 
-- Loading the names dataset and mapping characters to integer IDs.
-- Building training examples from a rolling context of five characters.
-- Splitting the examples into training, development, and test sets (80/10/10).
-- Training a character-level MLP with learned character embeddings.
-- Measuring cross-entropy loss, sampling generated names, and visualizing the learned embeddings.
+- Convert characters into integer tokens and build context/next-character examples.
+- Train a multi-layer perceptron (MLP) with learned character embeddings.
+- Track cross-entropy loss and evaluate on development and test splits.
+- Generate samples from a trained model and visualize character embeddings.
 
-The model embeds each of the five context characters into a 20-dimensional vector, concatenates those embeddings, and passes them through a 600-unit `tanh` hidden layer to predict the next character. The vocabulary contains the 26 letters plus a special end-of-name token.
+The notebook uses a context of five characters, 20-dimensional embeddings, and a 600-unit `tanh` hidden layer. It trains on a random 80% of the names and reserves 10% each for development and testing.
 
-## Run the notebook
+## Quick start
 
-Open `build_makemore_mlp.ipynb` in Google Colab or a local Jupyter environment. The notebook downloads `names.txt` from the [makemore repository](https://github.com/karpathy/makemore) when it runs.
+### Option 1: Google Colab
 
-For a local environment, install the notebook's Python dependencies:
+1. Open [`build_makemore_mlp.ipynb`](build_makemore_mlp.ipynb) in Google Colab.
+2. Run the cells from top to bottom. The notebook downloads `names.txt` from the makemore repository.
 
-```bash
-python -m pip install torch matplotlib jupyter
-```
+### Option 2: Run locally
 
-Then start Jupyter and open the notebook:
+You need Python 3 and Jupyter. A GPU is optional; training can take longer on a CPU.
 
 ```bash
+python -m venv .venv
+# macOS/Linux
+source .venv/bin/activate
+# Windows PowerShell: .venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
 jupyter notebook build_makemore_mlp.ipynb
 ```
 
-A GPU is optional; the notebook can run on a CPU, though training may take longer. The training loop runs for 500,000 iterations, so reduce that count if you want a quicker experiment.
+Run the notebook cells in order. The training loop runs for 500,000 iterations; lower this value in the notebook for a quicker trial.
 
-## Data and attribution
+## Repository contents
 
-The notebook uses `names.txt`, downloaded at runtime from [karpathy/makemore](https://github.com/karpathy/makemore). See that project for information about the dataset and its use.
+```text
+.
+├── build_makemore_mlp.ipynb  # Data preparation, training, evaluation, and sampling
+├── requirements.txt          # Python dependencies
+├── .gitignore                # Ignores local environments and generated files
+└── CONTRIBUTING.md           # Notes for people improving the project
+```
 
-## Learning goals
+## Dataset and attribution
 
-This is an educational implementation intended to make the steps of building and training a simple language model easy to inspect and experiment with. Try changing the context length, embedding size, hidden-layer size, or training settings and compare the results.
+The notebook downloads [`names.txt`](https://github.com/karpathy/makemore) from the makemore project at runtime. Please refer to the upstream project for dataset provenance and applicable terms. The dataset is not stored in this repository.
+
+## Possible next steps
+
+- Refactor reusable model and training code into Python modules.
+- Add command-line training and name-generation entry points.
+- Save and load model checkpoints.
+- Add automated tests and a reproducible environment/CI workflow.
+
+## License
+
+No license has been added yet. Until a license is chosen, do not assume others have permission to reuse, modify, or distribute this project's code. See GitHub's guide to [licensing a repository](https://docs.github.com/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository) before selecting one.

@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Downloaded dataset and generated artifacts
+names.txt
+*.pt
+*.pth
+
+# Editor / OS files
+.DS_Store
+.vscode/
+.idea/
